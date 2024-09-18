@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AcaraController;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PendaftarController;
 use App\Http\Controllers\FasilitasController;
 use App\Http\Controllers\ListMateriController;
@@ -26,7 +27,13 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-//Crud Untuk data pemateri
+
+
+Route::middleware(['auth:sanctum', 'role:user'])->group(function () {
+    Route::post('pendaftar', [PendaftarController::class, 'store']);        // Create a new registration
+});
+Route::middleware(['auth:sanctum', 'role:user,admin'])->group(function () {
+   //Crud Untuk data pemateri
 
 Route::get('pemateris', [PemateriController::class, 'index']);
 Route::post('pemateris', [PemateriController::class, 'store']);
@@ -81,16 +88,19 @@ Route::post('pendaftar/{pendaftar}', [PendaftarController::class, 'update']); //
 Route::post('pendaftar/{id}/konfirmasi-bayar', [PendaftarController::class, 'konfirmasiBayar']);
 
 //pendapatan
-Route::get('pendapatan/{acara}', [AcaraController::class, 'pendapatanByAcara']);    // Show a specific event
+Route::get('pendapatan/{acara}', [AcaraController::class, 'pendapatanByAcara']);    // Show a specific event    // Create a new registration
+});
 
 
 
 
-// Users
 
-
+//Api public
+Route::post('/notification',[PendaftarController::class,'notificationCallback']);
+Route::post('login',[AuthController::class , 'login']);
 Route::post('users', [UserController::class, 'store']);          // Create a new user
-Route::post('pendaftar', [PendaftarController::class, 'store']);        // Create a new registration
 Route::get('acaras', [AcaraController::class, 'index']);           // List all events
 Route::get('acaras/{acara}', [AcaraController::class, 'show']);    // Show a specific event
-Route::post('/notification',[PendaftarController::class,'notificationCallback']);
+
+
+
