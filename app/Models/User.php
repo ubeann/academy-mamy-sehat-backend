@@ -8,12 +8,19 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Filament\Models\Contracts\FilamentUser;
 
 
-class User extends Authenticatable
+
+class User extends Authenticatable implements FilamentUser
 {
     use HasApiTokens, HasFactory, Notifiable;
-    use HasRoles;
+    use HasRoles;   
+    
+    public function canAccessFilament(): bool
+    {
+        return $this->role === 'admin'; // Hanya pengguna dengan role 'admin' yang dapat mengakses Filament
+    }
 
     // Metode untuk memeriksa role
     public function hasRole($roles)
@@ -27,7 +34,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'nama',
+        'name',
         'institusi',
         'email',
         'nik',

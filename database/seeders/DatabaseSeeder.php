@@ -21,9 +21,9 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);\
         User::create([
-            'nama' => 'Admin User',
+            'name' => 'Admin User',
             'institusi' => 'Admin Institute',
-            'email' => 'admin@example.com',
+            'email' => 'galang@admin.com',
             'nik' => '1234567890123456',
             'wa' => '081234567890',
             'kota_asal' => 'Admin City',

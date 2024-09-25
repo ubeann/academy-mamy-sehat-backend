@@ -23,7 +23,7 @@ class UserController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'institusi' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
             'nik' => 'required|string|max:255|unique:users',
@@ -34,7 +34,7 @@ class UserController extends Controller
         ]);
 
         $user = User::create([
-            'nama' => $request->nama,
+            'name' => $request->name,
             'institusi' => $request->institusi,
             'email' => $request->email,
             'nik' => $request->nik,
@@ -63,7 +63,7 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         $request->validate([
-            'nama' => 'required|string|max:255',
+            'name' => 'required|string|max:255',
             'institusi' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
             'nik' => 'required|string|max:255|unique:users,nik,' . $user->id,
@@ -74,7 +74,7 @@ class UserController extends Controller
         ]);
 
         $user->update([
-            'nama' => $request->nama,
+            'name' => $request->nama,
             'institusi' => $request->institusi,
             'email' => $request->email,
             'nik' => $request->nik,

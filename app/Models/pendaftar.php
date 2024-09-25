@@ -13,7 +13,7 @@ class Pendaftar extends Model
         'user_id',
         'acara_id',
         'jumlah_bayar',
-        'status',
+    'status',
         'external_id'
     ];
 
