@@ -56,6 +56,7 @@ class AcaraResource extends Resource
                         ]),
                         TextInput::make('harga_early'),
                         TextInput::make('harga_reguler'),
+                        TextInput::make('harga_spesialis'),
                         TextInput::make('wa_link'),
                     ]),
                     Card::make([
@@ -142,6 +143,10 @@ class AcaraResource extends Resource
 
             TextColumn::make('harga_reguler')
                 ->label('Harga Reguler')
+                ->sortable()
+                ->formatStateUsing(fn($state) => 'Rp' . number_format($state, 0, ',', '.')),
+            TextColumn::make('harga_spesialis')
+                ->label('Harga spesialis')
                 ->sortable()
                 ->formatStateUsing(fn($state) => 'Rp' . number_format($state, 0, ',', '.')),
 

@@ -21,6 +21,7 @@ class Acara extends Model
         'status',
         'harga_early',
         'harga_reguler',
+        'harga_spesialis',
         'tgl_early',
         'wa_link'
     ];

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->string('status');
             $table->integer('harga_early');
             $table->integer('harga_reguler');
+            $table->integer('harga_spesialis');
             $table->string('wa_link');
             $table->timestamps();
         });

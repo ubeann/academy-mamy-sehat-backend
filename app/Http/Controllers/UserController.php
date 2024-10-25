@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Pendaftar;
+use App\Models\Acara;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -95,4 +97,18 @@ class UserController extends Controller
         $user->delete();
         return response()->json(['message' => 'User deleted successfully'], 200);
     }
+
+    public function history(Request $request)
+    {
+        // Dapatkan list acara_id dari Pendaftar yang sudah 'terbayar'
+        $acaraIds = Pendaftar::where('user_id', $request->user_id)
+                             ->where('status', 'terbayar')
+                             ->pluck('acara_id');
+                             
+        // Gunakan acara_id untuk mengambil data dari model Acara
+        $acaraData = Acara::whereIn('id', $acaraIds)->get();
+    
+        return response()->json($acaraData);
+    }
+    
 }

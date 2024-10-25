@@ -102,5 +102,7 @@ Route::post('users', [UserController::class, 'store']);          // Create a new
 Route::get('acaras', [AcaraController::class, 'index']);           // List all events
 Route::get('acaras/{acara}', [AcaraController::class, 'show']);    // Show a specific event
 
+Route::post('/history',[UserController::class ,'history']);
+
 
 

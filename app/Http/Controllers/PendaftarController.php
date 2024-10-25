@@ -119,7 +119,13 @@ class PendaftarController extends Controller
             }else {
                 $bayar = $acara->harga_reguler;
             }
-        
+            
+            $profesi = User::find($request->user_id)->profesi;
+            
+
+            if($profesi == "spesialis"){
+                $bayar = $acara->harga_spesialis;
+            }
             
             $items = new InvoiceItem([
                 'name' => $acara->nama_acara,
