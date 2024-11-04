@@ -17,9 +17,9 @@ RUN apk --no-cache add \
     libzip-dev \
     unzip \
     icu-dev \
-    postgresql-dev \
+    mysql-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo pdo_pgsql mbstring exif pcntl bcmath gd xml zip curl intl
+    && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd xml zip curl intl
 
 # Install Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
