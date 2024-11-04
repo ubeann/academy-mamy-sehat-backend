@@ -1,0 +1,18 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: academy-mamysehat-service
+    container_name: academy-mamysehat-service
+    restart: unless-stopped
+    working_dir: /var/www
+    volumes:
+      - ./docker/php/local.ini:/usr/local/etc/php/conf.d/local.ini
+    networks:
+      - academy-mamysehat
+    ports:
+      - "8004:9000"
+
+networks:
+  academy-mamysehat:

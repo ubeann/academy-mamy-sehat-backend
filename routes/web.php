@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AssetController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,6 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route to serve static assets like CSS and JavaScript files
+Route::get('{path}', [AssetController::class, 'getFile'])
+    ->where('path', '.*')
+    ->name('assets');
