@@ -17,11 +17,16 @@ class AssetController extends Controller
      * This method retrieves a file from the public directory and serves it
      * with the appropriate MIME type.
      *
-     * @param string $path The relative path of the file in the public directory
+     * @param string|null $path The relative path of the file in the public directory
      * @return \Illuminate\Http\Response
      */
-    public function getFile(string $path)
+    public function getFile(?string $path = null)
     {
+        // If no path is provided, return a 404 Not Found error
+        if (is_null($path)) {
+            abort(404, 'File not found');
+        }
+
         // Construct the full file path by prepending the public path
         $filePath = public_path("{$path}");
 
